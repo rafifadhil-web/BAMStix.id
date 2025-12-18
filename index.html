@@ -6,6 +6,10 @@
     <meta name="theme-color" content="#3A7BCE">
     <title>BAMStix.id - Pemesanan Tiket Online</title>
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%233A7BCE' width='100' height='100' rx='15'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-weight='bold'>B</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%233A7BCE' width='100' height='100' rx='15'/><text x='50' y='70' font-size='60' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-weight='bold'>B</text></svg>">
+    
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
@@ -304,6 +308,75 @@
             height: 200px;
             object-fit: cover;
             border-radius: 16px 16px 0 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .event-card img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Image Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s;
+        }
+
+        .image-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            animation: zoomIn 0.3s;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .image-modal-close:hover {
+            color: #bbb;
+        }
+
+        .image-modal-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
         }
 
         .event-card-body {
@@ -579,14 +652,18 @@
         <div class="menu-item" onclick="showCustomerSupport()">
             <i class="bi bi-headset"></i> Customer Support
         </div>
-        <div class="menu-item" onclick="showAdminPanel()">
-            <i class="bi bi-gear"></i> Admin Panel
-        </div>
     </div>
 
     <!-- Main Container -->
     <div class="main-container fade-in" id="mainContainer">
         <!-- Content will be dynamically loaded here -->
+    </div>
+
+    <!-- Image Modal -->
+    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+        <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+        <img class="image-modal-content" id="modalImage">
+        <div class="image-modal-caption" id="modalCaption"></div>
     </div>
 
     <!-- Bootstrap JS -->
@@ -613,26 +690,28 @@
                     // KONSER - 10 events
                     {
                         id: '1',
-                        title: 'Hadir Fes Vol 1',
+                        title: 'Konser Raisa Live 2024',
                         category: 'konser',
-                        price: 75000,
-                        date: '2025-11-15',
-                        time: '16:00',
-                        location: 'Taman Lingkar Lokananta',
-                        description: 'Festival Musik Lokananta Solo',
-                        image: 'asset/music3.jpg',
+                        price: 250000,
+                        date: '2024-12-25',
+                        time: '19:00',
+                        location: 'Jakarta Convention Center',
+                        description: 'Konser spektakuler Raisa dengan hits terbarunya',
+                        src: "../img/konserraisa.jpg",
+                        image:  "../img/konserraisa.jpg",
                         trending: true
                     },
                     {
                         id: '2',
-                        title: 'Lolipop Fest 2026',
+                        title: 'Tulus Manusia Tour',
                         category: 'konser',
-                        price: 135000,
-                        date: '2026-02-08',
-                        time: '15:30',
-                        location: 'De Tjolomadoe',
-                        description: 'SKA LOLLIPOP FEST 2026 SOLO',
-                        image: 'asset/music5.jpg',
+                        price: 300000,
+                        date: '2024-12-28',
+                        time: '19:30',
+                        location: 'ICE BSD',
+                        description: 'Tulus menggelar konser dengan konsep manusia',
+                        src: "../img/tulusmanusiatour.jpg",
+                        image: "../img/tulusmanusiatour.jpg",
                         trending: true
                     },
                     {
@@ -644,7 +723,8 @@
                         time: '18:00',
                         location: 'Gelora Bung Karno',
                         description: 'Reuni legendaris Dewa 19 dengan formasi asli',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Dewa+19',
+                        src: 'images/konser-dewa19.jpg',
+                        image: 'images/konser-dewa19.jpg',
                         trending: false
                     },
                     {
@@ -656,7 +736,8 @@
                         time: '19:00',
                         location: 'The Kasablanka Hall',
                         description: 'Pertunjukan vokal spektakuler dari Isyana',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Isyana',
+                        src: 'images/konser-isyana.jpg',
+                        image: 'images/konser-isyana.jpg',
                         trending: false
                     },
                     {
@@ -668,7 +749,8 @@
                         time: '20:00',
                         location: 'Balai Sarbini',
                         description: 'Konser akustik intimate dengan Payung Teduh',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Payung+Teduh',
+                        src: 'images/konser-payungteduh.jpg',
+                        image: 'images/konser-payungteduh.jpg',
                         trending: false
                     },
                     {
@@ -680,7 +762,8 @@
                         time: '19:00',
                         location: 'Ciputra Artpreneur',
                         description: 'RAN kembali dengan album dan lagu-lagu baru',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=RAN+Show',
+                        src: 'images/konser-ran.jpg',
+                        image: 'images/konser-ran.jpg',
                         trending: false
                     },
                     {
@@ -692,7 +775,8 @@
                         time: '18:30',
                         location: 'Tennis Indoor Senayan',
                         description: 'Tour Anugerah Terindah dari Sheila on 7',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Sheila+on+7',
+                        src: 'images/konser-sheilaon7.jpg',
+                        image: 'images/konser-sheilaon7.jpg',
                         trending: true
                     },
                     {
@@ -704,7 +788,8 @@
                         time: '19:00',
                         location: 'Usmar Ismail Hall',
                         description: 'Konser tribute mengenang Glenn Fredly',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Glenn+Tribute',
+                        src: 'images/konser-glennfredly.jpg',
+                        image: 'images/konser-glennfredly.jpg',
                         trending: false
                     },
                     {
@@ -716,7 +801,8 @@
                         time: '19:30',
                         location: 'The Pallas',
                         description: 'Konser solo pertama Mahalini',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Mahalini',
+                        src: 'images/konser-mahalini.jpg',
+                        image: 'images/konser-mahalini.jpg',
                         trending: false
                     },
                     {
@@ -728,7 +814,8 @@
                         time: '20:00',
                         location: 'M Bloc Space',
                         description: 'Juicy Luicy menghadirkan lagu-lagu hits mereka',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Juicy+Luicy',
+                        src: 'images/konser-juicyluicy.jpg',
+                        image: 'images/konser-juicyluicy.jpg',
                         trending: false
                     },
                     {
@@ -740,7 +827,8 @@
                         time: '14:00',
                         location: 'Lapangan Terbuka Solo',
                         description: 'Pesta rakyat tahunan untuk pecinta motor dua tak',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Two+Stroke+Party',
+                        src: '../img/music6.jpg',
+                        image: '..img/music6.jpg',
                         trending: true
                     },
                     {
@@ -752,7 +840,8 @@
                         time: '19:00',
                         location: 'GOR Manahan Solo',
                         description: 'Konser musik dengan band-band lokal terbaik',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Gigs+Eksplosif',
+                        src: 'img/music4.jpg',
+                        image: 'img/music4.jpg',
                         trending: false
                     },
                     {
@@ -764,7 +853,8 @@
                         time: '15:00',
                         location: 'The Park Mall Solo',
                         description: 'Festival musik dengan tema manis dan penuh warna',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Lollipop+Fest',
+                        src: 'images/konser-lollipop.jpg',
+                        image: 'images/konser-lollipop.jpg',
                         trending: false
                     },
                     {
@@ -776,7 +866,8 @@
                         time: '10:00',
                         location: 'Taman Balekambang Solo',
                         description: 'Festival kuliner dan musik lokal',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Sarga+Festival',
+                        src: 'images/konser-sarga.jpg',
+                        image: 'images/konser-sarga.jpg',
                         trending: true
                     },
                     {
@@ -788,7 +879,8 @@
                         time: '16:00',
                         location: 'Stadion Manahan Solo',
                         description: 'Festival musik dengan lineup band indie terbaik',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Hadir+Fest',
+                        src: 'img/music2.jpg',
+                        image: 'img/music2.jpg',
                         trending: true
                     },
                     {
@@ -800,7 +892,8 @@
                         time: '08:00',
                         location: 'Royal Surakarta Heritage',
                         description: 'Festival kesehatan dan musik premium',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Wellness+Festival',
+                        src: 'img/music1.jpg',
+                        image: 'img/music1.jpg',
                         trending: false
                     },
                     {
@@ -812,7 +905,8 @@
                         time: '16:00',
                         location: 'Lokananta Solo',
                         description: 'Kolaborasi Hadir Fest dengan Lokananta',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Hadir+x+Lokananta',
+                        src: 'images/konser-hadirlokananta.jpg',
+                        image: 'images/konser-hadirlokananta.jpg',
                         trending: false
                     },
                     {
@@ -824,7 +918,8 @@
                         time: '19:00',
                         location: 'Gelora Bung Karno Jakarta',
                         description: 'Konser Maroon 5 di Indonesia',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Maroon+5',
+                        src: 'img/music8.jpg',
+                        image: 'img/music8.jpg',
                         trending: true
                     },
                     {
@@ -836,7 +931,8 @@
                         time: '14:00',
                         location: 'Alun-Alun Kidul Solo',
                         description: 'Festival musik tahunan ArjunaFest',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=ArjunaFest',
+                        src: 'images/konser-arjunafest.jpg',
+                        image: 'images/konser-arjunafest.jpg',
                         trending: false
                     },
                     {
@@ -848,57 +944,62 @@
                         time: '18:00',
                         location: 'Golo Mori Flores',
                         description: 'Festival jazz internasional di Flores',
-                        image: 'https://via.placeholder.com/400x300/3A7BCE/FFFFFF?text=Golo+Mori+Jazz',
+                        src: 'images/konser-golomori.jpg',
+                        image: 'images/konser-golomori.jpg',
                         trending: true
                     },
                     
-                    // OLAHRAGA - 10 events
+                    // OLAHRAGA - 20 events
                     {
                         id: '11',
                         title: 'Persija vs Persib',
                         category: 'olahraga',
-                        price: 85000,
-                        date: '2024-09-29',
+                        price: 150000,
+                        date: '2024-12-20',
                         time: '15:30',
                         location: 'Stadion Gelora Bung Karno',
                         description: 'Laga klasik sepakbola Indonesia',
-                        image: 'asset/perssija.jpg',
+                        src: 'images/olahraga-persija.jpg',
+                        image: 'images/olahraga-persija.jpg',
                         trending: true
                     },
                     {
                         id: '12',
-                        title: 'Arema FC vs Persita',
+                        title: 'Arema FC vs Bali United',
                         category: 'olahraga',
-                        price: 100000,
-                        date: '2025-04-15',
+                        price: 120000,
+                        date: '2024-12-22',
                         time: '15:30',
-                        location: 'Arena Indomilk, Tangerang',
-                        description: 'Pertandingan seru Liga 1 BRI Indonesia',
-                        image: 'asset/olahraga.jpg',
+                        location: 'Stadion Kanjuruhan',
+                        description: 'Pertandingan seru Liga 1 Indonesia',
+                        src: 'images/olahraga-arema.jpg',
+                        image: 'images/olahraga-arema.jpg',
                         trending: false
                     },
                     {
                         id: '13',
-                        title: 'BNN run',
+                        title: 'Indonesia vs Thailand - Badminton',
                         category: 'olahraga',
-                        price: 125000,
-                        date: '2025-11-09',
+                        price: 200000,
+                        date: '2025-01-08',
                         time: '13:00',
-                        location: 'Gor ken Arok, Kota Malang',
-                        description: 'Fun run Kota Malang',
-                        image: 'asset/olahraga11.jpg.jpg',
+                        location: 'Istora Senayan',
+                        description: 'Pertandingan badminton internasional',
+                        src: 'img/olahraga2.jpg',
+                        image: 'img/olahraga2.jpg',
                         trending: true
                     },
                     {
                         id: '14',
-                        title: 'Kucingku Run 2025',
+                        title: 'Marathon Jakarta 2025',
                         category: 'olahraga',
-                        price: 165000,
-                        date: '2026-01-11',
+                        price: 300000,
+                        date: '2025-01-12',
                         time: '05:00',
-                        location: 'Sidoarjo cat house',
-                        description: 'Charity Run untuk kucing',
-                        image: 'aasset/olahraga12.jpg',
+                        location: 'Bundaran HI',
+                        description: 'Ikuti marathon tahunan Jakarta',
+                        src: 'images/olahraga-marathon.jpg',
+                        image: 'images/olahraga-marathon.jpg',
                         trending: false
                     },
                     {
@@ -906,11 +1007,12 @@
                         title: 'NBA Jakarta Showcase',
                         category: 'olahraga',
                         price: 500000,
-                        date: '2025-11-18',
+                        date: '2025-01-18',
                         time: '19:00',
                         location: 'Indonesia Arena',
                         description: 'Pertandingan eksibisi NBA di Jakarta',
-                        image: 'https://via.placeholder.com/400x300/2ECC71/FFFFFF?text=NBA+Show',
+                        src: 'images/olahraga-nba.jpg',
+                        image: 'images/olahraga-nba.jpg',
                         trending: true
                     },
                     {
@@ -922,7 +1024,8 @@
                         time: '09:00',
                         location: 'Senayan Tennis Court',
                         description: 'Turnamen tenis tingkat internasional',
-                        image: 'https://via.placeholder.com/400x300/2ECC71/FFFFFF?text=Tennis',
+                        src: 'images/olahraga-tennis.jpg',
+                        image: 'images/olahraga-tennis.jpg',
                         trending: false
                     },
                     {
@@ -934,7 +1037,8 @@
                         time: '14:00',
                         location: 'Sirkuit Mandalika',
                         description: 'Saksikan balapan MotoGP di Indonesia',
-                        image: 'https://via.placeholder.com/400x300/2ECC71/FFFFFF?text=MotoGP',
+                        src: 'images/olahraga-motogp.jpg',
+                        image: 'images/olahraga-motogp.jpg',
                         trending: true
                     },
                     {
@@ -946,7 +1050,8 @@
                         time: '15:00',
                         location: 'GOR Popki Cibubur',
                         description: 'Kejuaraan bola voli nasional',
-                        image: 'https://via.placeholder.com/400x300/2ECC71/FFFFFF?text=Volleyball',
+                        src: 'images/olahraga-volleyball.jpg',
+                        image: 'images/olahraga-volleyball.jpg',
                         trending: false
                     },
                     {
@@ -958,7 +1063,8 @@
                         time: '10:00',
                         location: 'Jakarta Convention Center',
                         description: 'Turnamen e-sports terbesar di Indonesia',
-                        image: 'https://via.placeholder.com/400x300/2ECC71/FFFFFF?text=E-Sports',
+                        src: 'images/olahraga-esports.jpg',
+                        image: 'images/olahraga-esports.jpg',
                         trending: false
                     },
                     {
@@ -970,7 +1076,8 @@
                         time: '06:00',
                         location: 'Monas',
                         description: 'Gowes bareng keliling Jakarta',
-                        image: 'https://via.placeholder.com/400x300/2ECC71/FFFFFF?text=Fun+Bike',
+                        src: 'images/olahraga-funbike.jpg',
+                        image: 'images/olahraga-funbike.jpg',
                         trending: false
                     },
                     {
@@ -982,19 +1089,21 @@
                         time: '05:00',
                         location: 'GBK Jakarta',
                         description: 'Half Marathon dengan kategori berbagai jarak',
-                        image: 'asset/oahraga3.jpg',
+                        src: 'images/olahraga-bfirun.jpg',
+                        image: 'images/olahraga-bfirun.jpg',
                         trending: true
                     },
                     {
                         id: '52',
                         title: 'IFCPF 2025 Asia-Oceania Cup (Semi-Final)',
                         category: 'olahraga',
-                        price: 50000,
+                        price: 0,
                         date: '2025-11-20',
                         time: '14:00',
                         location: 'Stadion Manahan Solo',
                         description: 'Semi-final piala Asia-Oceania terbuka untuk umum',
-                        image: 'asset/olahraga2.jpg',
+                        src: 'images/olahraga-ifcpf.jpg',
+                        image: 'images/olahraga-ifcpf.jpg',
                         trending: true
                     },
                     {
@@ -1006,7 +1115,8 @@
                         time: '05:30',
                         location: 'Jakarta Pusat',
                         description: 'Lari bersama dengan berbagai kategori',
-                        image: 'asset/olahraga7.jpg',
+                        src: 'images/olahraga-mrdiy.jpg',
+                        image: 'images/olahraga-mrdiy.jpg',
                         trending: false
                     },
                     {
@@ -1018,7 +1128,8 @@
                         time: '05:00',
                         location: 'Summarecon Bekasi',
                         description: 'Fun run 5K untuk seluruh keluarga',
-                        image: 'asset/olahraga6.jpg',
+                        src: 'images/olahraga-bekasi.jpg',
+                        image: 'images/olahraga-bekasi.jpg',
                         trending: false
                     },
                     {
@@ -1030,7 +1141,8 @@
                         time: '04:00',
                         location: 'Bandung',
                         description: 'Ultra marathon dengan jarak 200K',
-                        image: 'asset/olahraga4.jpg',
+                        src: 'images/olahraga-binloop.jpg',
+                        image: 'images/olahraga-binloop.jpg',
                         trending: false
                     },
                     {
@@ -1042,31 +1154,34 @@
                         time: '06:00',
                         location: 'BSD City',
                         description: 'Lari khusus untuk perayaan hari wanita',
-                        image: 'olahraga5.jpg',
+                        src: 'images/olahraga-womenrun.jpg',
+                        image: 'images/olahraga-womenrun.jpg',
                         trending: true
                     },
                     {
                         id: '57',
-                        title: 'Vegan Runner Challenge 2025',
+                        title: 'Jakarta Music Run Festival 2025',
                         category: 'olahraga',
-                        price: 95000,
-                        date: '2025-01-20',
+                        price: 350000,
+                        date: '2025-04-20',
                         time: '05:00',
                         location: 'Senayan Jakarta',
-                        description: 'Performa Nabati Super Atlet',
-                        image: 'asset/olahraga10.jpg',
+                        description: 'Lari sambil menikmati musik live',
+                        src: 'images/olahraga-musicrun.jpg',
+                        image: 'images/olahraga-musicrun.jpg',
                         trending: true
                     },
                     {
                         id: '58',
-                        title: 'BTN Run triathlon',
+                        title: 'Zombie Run Festival',
                         category: 'olahraga',
                         price: 350000,
-                        date: '2025-02-09',
+                        date: '2025-02-22',
                         time: '15:00',
-                        location: 'istraya senayan GBK',
-                        description: 'Lari, sepeda, renang, rasakan sensasinya',
-                        image: 'asset/olahraga9.jpg',
+                        location: 'Ancol Jakarta',
+                        description: 'Lari dengan tema zombie yang seru',
+                        src: 'images/olahraga-zombie.jpg',
+                        image: 'images/olahraga-zombie.jpg',
                         trending: false
                     },
                     {
@@ -1078,23 +1193,272 @@
                         time: '15:30',
                         location: 'Stadion Manahan Solo',
                         description: 'Derby klasik Jawa Tengah',
-                        image: 'asset/olahraga1.jpg',
+                        src: 'images/olahraga-derby.jpg',
+                        image: 'images/olahraga-derby.jpg',
                         trending: true
                     },
                     {
                         id: '60',
                         title: 'Fun Run Cak! Alfatekelits 2025',
                         category: 'olahraga',
-                        price: 200000,
+                        price: 250000,
                         date: '2025-02-16',
                         time: '05:00',
                         location: 'Surabaya',
                         description: 'Fun run dengan tema khas Surabaya',
-                        image: 'asset/olahraga8.jpg',
+                        src: 'images/olahraga-alfatekelits.jpg',
+                        image: 'images/olahraga-alfatekelits.jpg',
                         trending: false
                     },
 
-                    // SEMINAR - 10 events
+                    // SEMINAR - 19 events  
+                    {
+                        id: '21',
+                        title: 'Seminar Digital Marketing 2024',
+                        category: 'seminar',
+                        price: 100000,
+                        date: '2024-12-18',
+                        time: '09:00',
+                        location: 'Hotel Grand Hyatt',
+                        description: 'Pelajari strategi digital marketing terkini',
+                        src: 'images/seminar-digitalmarketing.jpg',
+                        image: 'images/seminar-digitalmarketing.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '22',
+                        title: 'Workshop AI & Machine Learning',
+                        category: 'seminar',
+                        price: 250000,
+                        date: '2024-12-27',
+                        time: '08:00',
+                        location: 'Universitas Indonesia',
+                        description: 'Pelatihan intensif AI dan ML untuk pemula',
+                        src: 'images/seminar-ai.jpg',
+                        image: 'images/seminar-ai.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '23',
+                        title: 'Startup Summit 2025',
+                        category: 'seminar',
+                        price: 300000,
+                        date: '2025-01-14',
+                        time: '09:00',
+                        location: 'Ritz Carlton Pacific Place',
+                        description: 'Konferensi startup terbesar Indonesia',
+                        src: 'images/seminar-startup.jpg',
+                        image: 'images/seminar-startup.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '24',
+                        title: 'Public Speaking Mastery',
+                        category: 'seminar',
+                        price: 150000,
+                        date: '2025-01-17',
+                        time: '13:00',
+                        location: 'Menara BCA',
+                        description: 'Tingkatkan kemampuan public speaking Anda',
+                        src: 'images/seminar-publicspeaking.jpg',
+                        image: 'images/seminar-publicspeaking.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '25',
+                        title: 'Financial Planning Workshop',
+                        category: 'seminar',
+                        price: 200000,
+                        date: '2025-01-23',
+                        time: '10:00',
+                        location: 'The Energy Building',
+                        description: 'Belajar merencanakan keuangan untuk masa depan',
+                        src: 'images/seminar-financial.jpg',
+                        image: 'images/seminar-financial.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '26',
+                        title: 'Leadership Excellence',
+                        category: 'seminar',
+                        price: 350000,
+                        date: '2025-01-28',
+                        time: '08:30',
+                        location: 'Shangri-La Hotel',
+                        description: 'Seminar kepemimpinan untuk eksekutif',
+                        src: 'images/seminar-leadership.jpg',
+                        image: 'images/seminar-leadership.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '27',
+                        title: 'Content Creator Bootcamp',
+                        category: 'seminar',
+                        price: 175000,
+                        date: '2025-02-03',
+                        time: '09:00',
+                        location: 'WeWork Plaza Indonesia',
+                        description: 'Menjadi content creator profesional',
+                        src: 'images/seminar-contentcreator.jpg',
+                        image: 'images/seminar-contentcreator.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '28',
+                        title: 'Cyber Security Summit',
+                        category: 'seminar',
+                        price: 400000,
+                        date: '2025-02-12',
+                        time: '08:00',
+                        location: 'Hotel Mulia Senayan',
+                        description: 'Konferensi keamanan siber internasional',
+                        src: 'images/seminar-cybersecurity.jpg',
+                        image: 'images/seminar-cybersecurity.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '29',
+                        title: 'E-Commerce Strategy 2025',
+                        category: 'seminar',
+                        price: 180000,
+                        date: '2025-02-18',
+                        time: '13:00',
+                        location: 'Kempinski Grand Indonesia',
+                        description: 'Strategi e-commerce di era digital',
+                        src: 'images/seminar-ecommerce.jpg',
+                        image: 'images/seminar-ecommerce.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '30',
+                        title: 'Motivasi & Produktivitas',
+                        category: 'seminar',
+                        price: 120000,
+                        date: '2025-02-24',
+                        time: '14:00',
+                        location: 'Balai Kartini',
+                        description: 'Tingkatkan motivasi dan produktivitas harian',
+                        src: 'images/seminar-motivasi.jpg',
+                        image: 'images/seminar-motivasi.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '61',
+                        title: 'Workshop Meta Ads 2024: Rahasia High Quality Leads',
+                        category: 'seminar',
+                        price: 100000,
+                        date: '2024-08-02',
+                        time: '09:00',
+                        location: 'Hotel Alila Solo',
+                        description: 'Workshop mendalam tentang Meta Ads',
+                        src: 'images/seminar-metaads.jpg',
+                        image: 'images/seminar-metaads.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '62',
+                        title: 'Polarisasi Musikal X BEM UNS',
+                        category: 'seminar',
+                        price: 850000,
+                        date: '2025-11-14',
+                        time: '13:00',
+                        location: 'Universitas Sebelas Maret',
+                        description: 'Screening dan talkshow musik',
+                        src: 'images/seminar-polarisasi.jpg',
+                        image: 'images/seminar-polarisasi.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '63',
+                        title: 'Foundation Workshop: Management for Gen Z',
+                        category: 'seminar',
+                        price: 400000,
+                        date: '2025-11-08',
+                        time: '08:00',
+                        location: 'Solo Creative Hub',
+                        description: 'Workshop manajemen khusus Gen Z',
+                        src: 'images/seminar-genz.jpg',
+                        image: 'images/seminar-genz.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '64',
+                        title: 'Seminar Nasional Monetion 2024',
+                        category: 'seminar',
+                        price: 20000,
+                        date: '2024-09-30',
+                        time: '08:00',
+                        location: 'FEB Universitas Muhammadiyah Surakarta',
+                        description: 'Seminar nasional HEMa Manajemen',
+                        src: 'images/seminar-monetion.jpg',
+                        image: 'images/seminar-monetion.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '65',
+                        title: 'Workshop Akuntax: Kesiapan SPT Tahunan',
+                        category: 'seminar',
+                        price: 250000,
+                        date: '2025-01-21',
+                        time: '09:00',
+                        location: 'Wisma Kahuripan Solo',
+                        description: 'Workshop persiapan SPT Tahunan yayasan',
+                        src: 'images/seminar-akuntax.jpg',
+                        image: 'images/seminar-akuntax.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '66',
+                        title: 'TDA Club: Public Speaking for Entrepreneur',
+                        category: 'seminar',
+                        price: 50000,
+                        date: '2024-09-04',
+                        time: '13:00',
+                        location: 'The Sunan Hotel Solo',
+                        description: 'Public speaking untuk pengusaha dan pemimpin',
+                        src: 'images/seminar-tda.jpg',
+                        image: 'images/seminar-tda.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '67',
+                        title: 'YOT Solo Workshop: Build a Great CV',
+                        category: 'seminar',
+                        price: 10000,
+                        date: '2020-12-05',
+                        time: '14:00',
+                        location: 'Coworking Space Solo',
+                        description: 'Workshop membuat CV yang menarik',
+                        src: 'images/seminar-yot.jpg',
+                        image: 'images/seminar-yot.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '68',
+                        title: 'Healing & Growing: Bloom Where You Are',
+                        category: 'seminar',
+                        price: 50000,
+                        date: '2025-12-13',
+                        time: '10:00',
+                        location: 'Rumah Atsiri Solo',
+                        description: 'Seminar tentang healing dan personal growth',
+                        src: 'images/seminar-healing.jpg',
+                        image: 'images/seminar-healing.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '69',
+                        title: 'Belajar Bareng Tiktok Shop (Khusus Pemula)',
+                        category: 'seminar',
+                        price: 99000,
+                        date: '2023-02-04',
+                        time: '09:00',
+                        location: 'Solo Technopark',
+                        description: 'Workshop TikTok Shop untuk pemula',
+                        src: 'images/seminar-tiktok.jpg',
+                        image: 'images/seminar-tiktok.jpg',
+                        trending: false
+                    },
                     {
                         id: '21',
                         title: 'Seminar Digital Marketing 2024',
@@ -1324,7 +1688,267 @@
                         trending: false
                     },
 
-                    // KESENIAN - 10 events
+                    // KESENIAN - 20 events
+                    {
+                        id: '31',
+                        title: 'Pameran Seni Rupa Nusantara',
+                        category: 'kesenian',
+                        price: 50000,
+                        date: '2024-12-22',
+                        time: '10:00',
+                        location: 'Galeri Nasional Indonesia',
+                        description: 'Pameran karya seni dari seluruh Indonesia',
+                        src: 'images/kesenian-nusantara.jpg',
+                        image: 'images/kesenian-nusantara.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '32',
+                        title: 'Teater Musikal Indonesia',
+                        category: 'kesenian',
+                        price: 180000,
+                        date: '2024-12-30',
+                        time: '19:00',
+                        location: 'Teater Jakarta',
+                        description: 'Pertunjukan musikal dengan aktor terbaik',
+                        src: 'images/kesenian-teater.jpg',
+                        image: 'images/kesenian-teater.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '33',
+                        title: 'Wayang Kulit Klasik',
+                        category: 'kesenian',
+                        price: 40000,
+                        date: '2025-01-11',
+                        time: '20:00',
+                        location: 'Taman Ismail Marzuki',
+                        description: 'Pertunjukan wayang kulit tradisional',
+                        src: 'images/kesenian-wayang.jpg',
+                        image: 'images/kesenian-wayang.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '34',
+                        title: 'Pameran Fotografi Jakarta',
+                        category: 'kesenian',
+                        price: 30000,
+                        date: '2025-01-16',
+                        time: '10:00',
+                        location: 'Ruang Kreatif Salihara',
+                        description: 'Koleksi foto terbaik fotografer Indonesia',
+                        src: 'images/kesenian-fotografi.jpg',
+                        image: 'images/kesenian-fotografi.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '35',
+                        title: 'Tari Kontemporer Modern',
+                        category: 'kesenian',
+                        price: 120000,
+                        date: '2025-01-21',
+                        time: '19:30',
+                        location: 'Graha Bhakti Budaya',
+                        description: 'Pertunjukan tari kontemporer yang memukau',
+                        src: 'images/kesenian-tari.jpg',
+                        image: 'images/kesenian-tari.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '36',
+                        title: 'Festival Batik Indonesia',
+                        category: 'kesenian',
+                        price: 25000,
+                        date: '2025-01-27',
+                        time: '09:00',
+                        location: 'Museum Tekstil',
+                        description: 'Pameran dan workshop batik nusantara',
+                        src: 'images/kesenian-batik.jpg',
+                        image: 'images/kesenian-batik.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '37',
+                        title: 'Stand Up Comedy Festival',
+                        category: 'kesenian',
+                        price: 150000,
+                        date: '2025-02-07',
+                        time: '19:00',
+                        location: 'The Tribrata Auditorium',
+                        description: 'Festival komedi dengan komedian terbaik',
+                        src: 'images/kesenian-standup.jpg',
+                        image: 'images/kesenian-standup.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '38',
+                        title: 'Pameran Lukisan Affandi',
+                        category: 'kesenian',
+                        price: 35000,
+                        date: '2025-02-14',
+                        time: '10:00',
+                        location: 'Museum Affandi',
+                        description: 'Karya-karya maestro Affandi',
+                        src: 'images/kesenian-affandi.jpg',
+                        image: 'images/kesenian-affandi.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '39',
+                        title: 'Gamelan Orchestra Performance',
+                        category: 'kesenian',
+                        price: 60000,
+                        date: '2025-02-19',
+                        time: '18:00',
+                        location: 'Teater Salihara',
+                        description: 'Orkestra gamelan dengan sentuhan modern',
+                        src: 'images/kesenian-gamelan.jpg',
+                        image: 'images/kesenian-gamelan.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '40',
+                        title: 'Seni Instalasi Kontemporer',
+                        category: 'kesenian',
+                        price: 45000,
+                        date: '2025-02-26',
+                        time: '11:00',
+                        location: 'Dia.Lo.Gue Artspace',
+                        description: 'Pameran seni instalasi interaktif',
+                        src: 'images/kesenian-instalasi.jpg',
+                        image: 'images/kesenian-instalasi.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '70',
+                        title: 'Pementasan Seni "Merajut Cerita Menyatukan Rasa"',
+                        category: 'kesenian',
+                        price: 0,
+                        date: '2025-10-26',
+                        time: '18:00',
+                        location: 'Taman Budaya Solo',
+                        description: 'Pementasan seni terbuka untuk apresiasi',
+                        src: 'images/kesenian-merajut.jpg',
+                        image: 'images/kesenian-merajut.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '71',
+                        title: 'Begawi Budaya Dewan Kesenian Metro',
+                        category: 'kesenian',
+                        price: 0,
+                        date: '2025-11-15',
+                        time: '17:00',
+                        location: 'Gedung Kesenian Metro',
+                        description: 'Pentas seni budaya daerah Metro',
+                        src: 'images/kesenian-begawi.jpg',
+                        image: 'images/kesenian-begawi.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '72',
+                        title: 'Festival Teater Indonesia 2025',
+                        category: 'kesenian',
+                        price: 0,
+                        date: '2025-12-06',
+                        time: '18:00',
+                        location: 'Teater Jakarta TIM',
+                        description: 'Festival teater nasional dengan reservasi',
+                        src: 'images/kesenian-festivalteater.jpg',
+                        image: 'images/kesenian-festivalteater.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '73',
+                        title: 'Pertunjukan Seni Gambang Semarang',
+                        category: 'kesenian',
+                        price: 0,
+                        date: '2025-11-23',
+                        time: '19:00',
+                        location: 'Lawang Sewu Semarang',
+                        description: 'Pertunjukan musik tradisional Gambang Semarang',
+                        src: 'images/kesenian-gambang.jpg',
+                        image: 'images/kesenian-gambang.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '74',
+                        title: 'Gelar Seni Pasar Kangen Yogyakarta',
+                        category: 'kesenian',
+                        price: 0,
+                        date: '2025-09-07',
+                        time: '10:00',
+                        location: 'Alun-Alun Kidul Yogyakarta',
+                        description: 'Festival seni dan kuliner tradisional',
+                        src: 'images/kesenian-pasarkangen.jpg',
+                        image: 'images/kesenian-pasarkangen.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '75',
+                        title: 'Gelar Seni Rakyat (Jaranan Jawa Timur)',
+                        category: 'kesenian',
+                        price: 0,
+                        date: '2025-11-27',
+                        time: '16:00',
+                        location: 'Pendopo Kabupaten Ponorogo',
+                        description: 'Pertunjukan seni Jaranan khas Jawa Timur',
+                        src: 'images/kesenian-jaranan.jpg',
+                        image: 'images/kesenian-jaranan.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '76',
+                        title: 'Surabaya Punya Wayang Orang',
+                        category: 'kesenian',
+                        price: 0,
+                        date: '2025-11-22',
+                        time: '19:00',
+                        location: 'Gedung Cak Durasim Surabaya',
+                        description: 'Pertunjukan wayang orang khas Surabaya',
+                        src: 'images/kesenian-wayangorang.jpg',
+                        image: 'images/kesenian-wayangorang.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '77',
+                        title: 'International Mask Festival (IMF) 2025',
+                        category: 'kesenian',
+                        price: 0,
+                        date: '2025-11-14',
+                        time: '15:00',
+                        location: 'Alun-Alun Kota Malang',
+                        description: 'Festival topeng internasional',
+                        src: 'images/kesenian-maskfestival.jpg',
+                        image: 'images/kesenian-maskfestival.jpg',
+                        trending: true
+                    },
+                    {
+                        id: '78',
+                        title: 'Malam Anugerah Sayembara Naskah Teater 2025',
+                        category: 'kesenian',
+                        price: 0,
+                        date: '2025-11-27',
+                        time: '19:00',
+                        location: 'Graha Bhakti Budaya Jakarta',
+                        description: 'Malam penganugerahan naskah teater terbaik',
+                        src: 'images/kesenian-anugerah.jpg',
+                        image: 'images/kesenian-anugerah.jpg',
+                        trending: false
+                    },
+                    {
+                        id: '79',
+                        title: 'Festival Kesenian Rakyat Semilir',
+                        category: 'kesenian',
+                        price: 40000,
+                        date: '2025-10-19',
+                        time: '14:00',
+                        location: 'Alun-Alun Semilir Solo',
+                        description: 'Festival kesenian rakyat dengan berbagai pertunjukan',
+                        src: 'images/kesenian-semilir.jpg',
+                        image: 'images/kesenian-semilir.jpg',
+                        trending: true
+                    },
                     {
                         id: '31',
                         title: 'Pameran Seni Rupa Nusantara',
@@ -1708,6 +2332,35 @@
             return new Date(dateString).toLocaleDateString('id-ID', options);
         }
 
+        // ===== IMAGE MODAL FUNCTIONS =====
+        function openImageModal(imageSrc, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            modal.classList.add('active');
+            modalImg.src = imageSrc;
+            modalCaption.textContent = caption;
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+
         // ===== PAGE RENDERING =====
         function showPage(page, data = null) {
             showLoader();
@@ -1755,9 +2408,6 @@
                         break;
                     case 'scanner':
                         renderScannerPage();
-                        break;
-                    case 'admin':
-                        renderAdminPage();
                         break;
                     case 'profile':
                         renderProfilePage();
@@ -1864,7 +2514,7 @@
                         <div class="col-md-6 col-lg-3 mb-3">
                             <div class="card-custom event-card" onclick="showEventDetail('${event.id}')">
                                 ${event.trending ? '<span class="badge-trending">Trending</span>' : ''}
-                                <img src="${event.image}" alt="${event.title}">
+                                <img src="${event.image}" alt="${event.title}" onclick="event.stopPropagation(); openImageModal('${event.image}', '${event.title}')">
                                 <div class="event-card-body">
                                     <div class="event-title">${event.title}</div>
                                     <div class="event-price">${formatCurrency(event.price)}</div>
@@ -1908,7 +2558,7 @@
                     ${events.length > 0 ? events.map(event => `
                         <div class="col-md-6 col-lg-4 mb-3">
                             <div class="card-custom event-card" onclick="showEventDetail('${event.id}')">
-                                <img src="${event.image}" alt="${event.title}">
+                                <img src="${event.image}" alt="${event.title}" onclick="event.stopPropagation(); openImageModal('${event.image}', '${event.title}')">
                                 <div class="event-card-body">
                                     <div class="event-title">${event.title}</div>
                                     <div class="event-price">${formatCurrency(event.price)}</div>
@@ -1934,7 +2584,7 @@
 
             const html = `
                 <div class="card-custom">
-                    <img src="${event.image}" style="width: 100%; height: 300px; object-fit: cover;">
+                    <img src="${event.image}" style="width: 100%; height: 300px; object-fit: cover; cursor: pointer;" onclick="openImageModal('${event.image}', '${event.title}')" alt="${event.title}">
                     <div class="p-4">
                         <h1 class="event-title mb-3">${event.title}</h1>
                         <div class="event-info mb-2">
@@ -2264,7 +2914,7 @@
                     <div class="card-custom mb-3">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="${ticket.eventImage}" style="width: 100%; height: 200px; object-fit: cover;">
+                                <img src="${ticket.eventImage}" style="width: 100%; height: 200px; object-fit: cover; cursor: pointer;" onclick="openImageModal('${ticket.eventImage}', '${ticket.eventTitle}')" alt="${ticket.eventTitle}">
                             </div>
                             <div class="col-md-8 p-4">
                                 <h4>${ticket.eventTitle}</h4>
@@ -2320,7 +2970,7 @@
                     ${events.map(event => `
                         <div class="col-md-6 col-lg-4 mb-3">
                             <div class="card-custom">
-                                <img src="${event.image}" alt="${event.title}" style="width: 100%; height: 150px; object-fit: cover;">
+                                <img src="${event.image}" alt="${event.title}" style="width: 100%; height: 150px; object-fit: cover; cursor: pointer;" onclick="openImageModal('${event.image}', '${event.title}')">
                                 <div class="p-3">
                                     <h5>${event.title}</h5>
                                     <p class="mb-2"><small>${event.category}</small></p>
@@ -2502,7 +3152,7 @@
                 <h2 class="mb-4">Profil Saya</h2>
                 <div class="card-custom p-4">
                     <div class="text-center mb-4">
-                        <img src="${profile.avatar}" alt="Avatar" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+                        <img src="${profile.avatar}" alt="Avatar" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; cursor: pointer;" onclick="openImageModal('${profile.avatar}', '${profile.name}')">
                         <h3>${profile.name}</h3>
                         <p class="text-muted">${profile.bio}</p>
                     </div>
@@ -2677,13 +3327,7 @@
         }
 
         function showCustomerSupport() {
-            const whatsappNumber = '6281234567890';
-            const message = 'Halo BAMStix, saya butuh bantuan...';
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        function showAdminPanel() {
-            showPage('admin');
+            window.open('https://wa.me/qr/E2ATXOBAOENCE1', '_blank');
         }
 
         function showAddEventModal() {
@@ -2748,7 +3392,7 @@
 
             bootstrap.Modal.getInstance(document.getElementById('addEventModal')).hide();
             showToast('Event berhasil ditambahkan', 'success');
-            renderAdminPage();
+            showPage('home');
         }
 
         function editEvent(eventId) {
@@ -2812,7 +3456,7 @@
             saveEvents(events);
             bootstrap.Modal.getInstance(document.getElementById('editEventModal')).hide();
             showToast('Event berhasil diupdate', 'success');
-            renderAdminPage();
+            showPage('home');
         }
 
         function deleteEvent(eventId) {
@@ -2821,7 +3465,7 @@
             const events = getEvents().filter(e => e.id !== eventId);
             saveEvents(events);
             showToast('Event berhasil dihapus', 'success');
-            renderAdminPage();
+            showPage('home');
         }
 
         function showSearchModal() {
