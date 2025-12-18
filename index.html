@@ -17,7 +17,7 @@
     <!-- QR Code Generator -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     
-    <link rel="manifest" href="#" id="manifest-placeholder">
+    <link rel="manifest" href="manifest.json">
     
     <style>
         :root {
@@ -3571,34 +3571,6 @@
             const blob = new Blob([swCode], { type: 'application/javascript' });
             return URL.createObjectURL(blob);
         }
-
-        // ===== MANIFEST =====
-        const manifest = {
-            name: 'BAMStix.id',
-            short_name: 'BAMStix',
-            description: 'Aplikasi Pemesanan Tiket Online',
-            start_url: '/',
-            display: 'standalone',
-            background_color: '#3A7BCE',
-            theme_color: '#3A7BCE',
-            icons: [
-                {
-                    src: 'img/bmastix192.png',
-                    sizes: '192x192',
-                    type: 'image/png'
-            
-                },
-                {
-                    src: 'img/bmastix512.png',
-                    sizes: '512x512',
-                    type: 'image/png'
-                }
-            ]
-        };
-
-        const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-        const manifestURL = URL.createObjectURL(manifestBlob);
-        document.getElementById('manifest-placeholder').setAttribute('href', manifestURL);
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', () => {
