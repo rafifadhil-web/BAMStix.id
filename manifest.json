@@ -1,0 +1,46 @@
+{
+  "id": "./",
+  "name": "BAMStix.id - Pemesanan Tiket Online",
+  "short_name": "BAMStix.id",
+  "description": "BAMStix.id adalah aplikasi modern untuk membeli berbagai tiket dalam satu tempat. Nikmati kemudahan membeli tiket olahraga, event, dan kesenian secara online. Praktis, cepat, dan aman semua tiket ada di satu aplikasi!.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#3A7BCE",
+  "theme_color": "#3A7BCE",
+  "orientation": "portrait",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "img/bmastix192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+      
+    },
+    {
+      "src": "img/bmastix512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose":"any"
+    }
+  
+  ],
+  "shortcuts": [
+    {
+      "name": "Buka Beranda",
+      "short_name": "Home",
+      "url": "./index.html",
+      "icons": [
+        {
+          "src": "img/bmastix192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "categories": [
+    "productivity",
+    "utilities"
+  ]
+}
