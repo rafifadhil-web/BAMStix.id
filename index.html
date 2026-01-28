@@ -75,7 +75,6 @@
             overflow-x: hidden;
         }
 
-        
         body.dark-mode {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -207,7 +206,7 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            z-index: 1000;
+            z-index: 999;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
         }
 
@@ -493,6 +492,10 @@
             font-weight: 500;
         }
 
+        body.dark-mode .nav-link-sidebar {
+            color: var(--text-color);
+        }
+
         .nav-link-sidebar:hover {
             background-color: var(--soft-blue);
             color: var(--primary);
@@ -529,7 +532,7 @@
             font-weight: 700;
         }
 
-         body.dark-mode h1,
+        body.dark-mode h1,
         body.dark-mode h2,
         body.dark-mode h3,
         body.dark-mode h4,
@@ -566,7 +569,8 @@
             font-weight: 700;
             color: var(--black);
         }
-         body.dark-mode .section-title {
+
+        body.dark-mode .section-title {
             color: var(--text-color);
         }
 
@@ -685,10 +689,10 @@
             color: var(--warning);
         }
 
-        /* Floating Action Button (FAB) */
+        /* Floating Action Button (FAB) - Fixed z-index issue */
         .fab {
             position: fixed;
-            bottom: 90px;
+            bottom: 90px; /* Increased from 80px to avoid overlap with bottom nav */
             right: 20px;
             width: 60px;
             height: 60px;
@@ -698,7 +702,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            z-index: 998;
+            z-index: 998; /* Reduced from 999 to be below bottom nav */
             cursor: pointer;
             transition: var(--transition);
             animation: pulse 2s infinite;
@@ -778,9 +782,18 @@
             border: 2px dashed #dee2e6;
         }
 
+        body.dark-mode .purchase-qr-placeholder {
+            background-color: #2d3748;
+            border-color: #4a5568;
+        }
+
         .purchase-qr-placeholder i {
             font-size: 40px;
             color: #adb5bd;
+        }
+
+        body.dark-mode .purchase-qr-placeholder i {
+            color: #718096;
         }
 
         .purchase-details {
@@ -792,6 +805,10 @@
             font-weight: 600;
             color: var(--black);
             margin-bottom: 8px;
+        }
+
+        body.dark-mode .purchase-event-title {
+            color: var(--text-color);
         }
 
         .purchase-meta {
@@ -807,6 +824,10 @@
             gap: 6px;
             font-size: 13px;
             color: #666;
+        }
+
+        body.dark-mode .purchase-meta-item {
+            color: #cbd5e0;
         }
 
         .purchase-meta-item i {
@@ -829,10 +850,18 @@
             color: #666;
         }
 
+        body.dark-mode .no-purchase-history {
+            color: #cbd5e0;
+        }
+
         .no-purchase-history i {
             font-size: 40px;
             margin-bottom: 15px;
             color: #dee2e6;
+        }
+
+        body.dark-mode .no-purchase-history i {
+            color: #4a5568;
         }
 
         .no-purchase-history p {
@@ -856,7 +885,7 @@
             }
             
             .fab {
-                bottom: 70px;
+                bottom: 80px; /* Adjusted for mobile */
                 right: 15px;
                 width: 56px;
                 height: 56px;
@@ -872,6 +901,55 @@
                 flex-direction: column;
                 gap: 8px;
             }
+        }
+
+        /* Additional dark mode fixes */
+        body.dark-mode .dropdown-menu {
+            background-color: var(--card-bg);
+            border-color: #374151;
+        }
+
+        body.dark-mode .dropdown-item {
+            color: var(--text-color);
+        }
+
+        body.dark-mode .dropdown-item:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        body.dark-mode .form-control {
+            background-color: #2d3748;
+            border-color: #4a5568;
+            color: var(--text-color);
+        }
+
+        body.dark-mode .form-control::placeholder {
+            color: #a0aec0;
+        }
+
+        body.dark-mode .btn-outline-secondary {
+            border-color: #4a5568;
+            color: var(--text-color);
+        }
+
+        body.dark-mode .btn-outline-secondary:hover {
+            background-color: #4a5568;
+            border-color: #4a5568;
+            color: var(--text-color);
+        }
+
+        body.dark-mode .text-muted {
+            color: #a0aec0 !important;
+        }
+
+        body.dark-mode .badge.bg-light {
+            background-color: #4a5568 !important;
+            color: var(--text-color) !important;
+        }
+
+        body.dark-mode .carousel-caption {
+            background: rgba(0, 0, 0, 0.7) !important;
         }
     </style>
 </head>
@@ -963,7 +1041,7 @@
             </div>
             
             <!-- Dark Mode Toggle -->
-             <div class="mt-4">
+            <div class="mt-4">
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="darkModeToggle">
                     <label class="form-check-label" for="darkModeToggle">Mode Gelap</label>
@@ -973,7 +1051,7 @@
             <!-- App Info -->
             <div class="mt-5 pt-4 border-top text-center">
                 <p class="small-text text-muted mb-0">BAMStix.id v1.0</p>
-                <p class="small-text text-muted">© 2026 All rights reserved</p>
+                <p class="small-text text-muted">© 2024 All rights reserved</p>
             </div>
         </div>
     </div>
@@ -1510,7 +1588,7 @@
                 location: "Jakarta",
                 price: 750000,
                 description: "Lari marathon dengan kategori Half Marathon. Tiket sudah sold out untuk kategori ini.",
-                image: "img/olahraga3.jpg",
+                image: "img/olahraga11.jpg",
                 capacity: 1000,
                 trending: true
             },
@@ -1523,7 +1601,7 @@
                 location: "Jakarta International Stadium",
                 price: 0,
                 description: "Turnamen sepak bola untuk penyandang disabilitas cerebral palsy. Terbuka untuk umum.",
-                image: "img/olahraga17.jpg",
+                image: "img/olahraga2.jpg",
                 capacity: 5000,
                 trending: false
             },
@@ -1575,7 +1653,7 @@
                 location: "Jakarta",
                 price: 300000,
                 description: "Lari 10K untuk merayakan Hari Perempuan Internasional.",
-                image: "img/olahraga15.jpg",
+                image: "img/olahraga12.jpg",
                 capacity: 2000,
                 trending: true
             },
@@ -1720,7 +1798,7 @@
                 location: "Solo",
                 price: 75000,
                 description: "Kolaborasi festival musik dengan studio rekaman Lokananta.",
-                image: "img/PayungTeduh.jpg",
+                image: "img/music2.jpg",
                 capacity: 1200,
                 trending: true
             },
@@ -1746,7 +1824,7 @@
                 location: "Malang",
                 price: 35000,
                 description: "Festival musik kampus tahunan dengan berbagai penampilan.",
-                image: "img/dewa12reunion.jpg",
+                image: "img/RAN.jpg",
                 capacity: 2000,
                 trending: true
             },
@@ -1759,7 +1837,7 @@
                 location: "Jakarta",
                 price: 6500000,
                 description: "Festival jazz internasional dengan musisi jazz dunia.",
-                image: "img/juicylucy.jpg",
+                image: "img/music13.jpg",
                 capacity: 1500,
                 trending: true
             },
@@ -1774,7 +1852,7 @@
                 location: "Jakarta",
                 price: 0,
                 description: "Pertunjukan seni yang mengangkat cerita-cerita lokal.",
-                image: "img/kesenian2.jpg",
+                image: "img/kesenian1.jpg",
                 capacity: 800,
                 trending: false
             },
@@ -1787,7 +1865,7 @@
                 location: "Metro, Lampung",
                 price: 0,
                 description: "Pagelaran budaya yang menampilkan berbagai kesenian tradisional.",
-                image: "img/kesenian1.jpg",
+                image: "img/kesenian2.jpg",
                 capacity: 1000,
                 trending: false
             },
@@ -1800,7 +1878,7 @@
                 location: "Jakarta",
                 price: 0,
                 description: "Festival teater terbesar di Indonesia dengan berbagai kelompok teater.",
-                image: "img/kesenian11.jpeg",
+                image: "img/kesenian3.jpg",
                 capacity: 1500,
                 trending: true
             },
@@ -1813,7 +1891,7 @@
                 location: "Semarang",
                 price: 0,
                 description: "Pertunjukan musik tradisional Gambang Semarang.",
-                image: "img/kesenian3.jpg",
+                image: "img/kesenian4.jpg",
                 capacity: 600,
                 trending: false
             },
@@ -1826,7 +1904,7 @@
                 location: "Yogyakarta",
                 price: 0,
                 description: "Pameran dan pertunjukan seni di Pasar Kangen Yogyakarta.",
-                image: "img/kesenian4.jpg",
+                image: "img/kesenian5.jpg",
                 capacity: 2000,
                 trending: true
             },
@@ -1839,7 +1917,7 @@
                 location: "Surabaya",
                 price: 0,
                 description: "Pertunjukan seni rakyat Jaranan dari Jawa Timur.",
-                image: "img/kesenian5.jpg",
+                image: "img/kesenian6.jpg",
                 capacity: 1200,
                 trending: false
             },
@@ -1852,7 +1930,7 @@
                 location: "Surabaya",
                 price: 0,
                 description: "Pertunjukan wayang orang dengan lakon-lakon terkenal.",
-                image: "img/kesenian6.jpg",
+                image: "img/kesenian7.jpg",
                 capacity: 800,
                 trending: true
             },
@@ -1865,7 +1943,7 @@
                 location: "Jakarta",
                 price: 0,
                 description: "Festival topeng internasional dengan peserta dari berbagai negara.",
-                image: "img/kesenian7.jpg",
+                image: "img/kesenian8.jpg",
                 capacity: 3000,
                 trending: true
             },
@@ -1878,7 +1956,7 @@
                 location: "Jakarta",
                 price: 0,
                 description: "Malam penganugerahan sayembara naskah teater terbaik.",
-                image: "img/kesenian8.jpg",
+                image: "img/kesenian9.jpg",
                 capacity: 500,
                 trending: false
             },
@@ -1891,7 +1969,7 @@
                 location: "Semarang",
                 price: 40000,
                 description: "Festival kesenian rakyat dengan berbagai pertunjukan tradisional.",
-                image: "img/kesenian9.jpg",
+                image: "img/kesenian10.jpg",
                 capacity: 1500,
                 trending: true
             },
@@ -1997,7 +2075,7 @@
                 location: "Jakarta",
                 price: 50000,
                 description: "Seminar tentang kesehatan mental dan pengembangan diri.",
-                image: "img/seminar 6.jpg",
+                image: "img/seminar 7.webp",
                 capacity: 120,
                 trending: true
             },
@@ -2148,7 +2226,7 @@
             });
         }
 
-       // Apply dark mode - FIXED BUG
+        // Apply dark mode - FIXED BUG
         function applyDarkMode() {
             if (state.settings.darkMode) {
                 document.body.classList.add('dark-mode');
@@ -2163,8 +2241,7 @@
                 // Update meta theme-color for light mode
                 document.querySelector('meta[name="theme-color"]').setAttribute('content', '#3A7BCE');
             }
-            }
-        
+        }
 
         // Setup event listeners
         function setupEventListeners() {
@@ -2229,7 +2306,7 @@
                 closeSidebar();
             });
 
-             // Dark mode toggle - FIXED BUG
+            // Dark mode toggle - FIXED BUG
             darkModeToggle.addEventListener('change', () => {
                 state.settings.darkMode = darkModeToggle.checked;
                 applyDarkMode();
