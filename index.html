@@ -43,6 +43,9 @@
             --white: #161B22;
             --black: #EDEDED;
             --dark-grey: #c9d1d9;
+            --success: #2ECC71;
+            --warning: #F1C40F;
+            --danger: #E74C3C;
         }
 
         [data-theme="purple"] {
@@ -70,6 +73,53 @@
             padding-bottom: 70px;
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        
+        body.dark-mode {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        body.dark-mode .navbar {
+            background-color: var(--card-bg) !important;
+        }
+
+        body.dark-mode .card {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        body.dark-mode .card h1,
+        body.dark-mode .card h2,
+        body.dark-mode .card h3,
+        body.dark-mode .card h4,
+        body.dark-mode .card h5,
+        body.dark-mode .card h6,
+        body.dark-mode .card .event-title {
+            color: var(--text-color);
+        }
+
+        body.dark-mode .icon-bar {
+            background-color: var(--card-bg);
+        }
+
+        body.dark-mode .sidebar {
+            background-color: var(--card-bg);
+        }
+
+        body.dark-mode .search-bar {
+            background-color: #2d3748;
+            color: var(--text-color);
+        }
+
+        body.dark-mode .payment-method {
+            background-color: var(--card-bg);
+            border-color: #374151;
+        }
+
+        body.dark-mode .purchase-history-card {
+            background-color: var(--card-bg);
         }
 
         .navbar {
@@ -479,6 +529,15 @@
             font-weight: 700;
         }
 
+         body.dark-mode h1,
+        body.dark-mode h2,
+        body.dark-mode h3,
+        body.dark-mode h4,
+        body.dark-mode h5,
+        body.dark-mode h6 {
+            color: var(--text-color);
+        }
+
         h1 {
             font-size: 24px;
         }
@@ -506,6 +565,9 @@
             margin: 20px 0 15px 0;
             font-weight: 700;
             color: var(--black);
+        }
+         body.dark-mode .section-title {
+            color: var(--text-color);
         }
 
         .cart-item {
