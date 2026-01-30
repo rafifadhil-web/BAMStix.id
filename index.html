@@ -34,20 +34,6 @@
             --transition: all 0.3s ease;
         }
 
-        [data-theme="dark"] {
-            --bg-color: #0D1117;
-            --card-bg: #161B22;
-            --text-color: #EDEDED;
-            --light-grey: #1a1f29;
-            --soft-blue: #1e2532;
-            --white: #161B22;
-            --black: #EDEDED;
-            --dark-grey: #c9d1d9;
-            --success: #2ECC71;
-            --warning: #F1C40F;
-            --danger: #E74C3C;
-        }
-
         [data-theme="purple"] {
             --primary: #8A2BE2;
             --primary-dark: #7a1ad1;
@@ -73,73 +59,6 @@
             padding-bottom: 70px;
             min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        body.dark-mode {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
-
-        body.dark-mode .navbar {
-            background-color: var(--card-bg) !important;
-        }
-
-        body.dark-mode .card {
-             background-color: var(--card-bg);
-             color: var(--text-color);
-             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        body.dark-mode .card h1,
-        body.dark-mode .card h2,
-        body.dark-mode .card h3,
-        body.dark-mode .card h4,
-        body.dark-mode .card h5,
-        body.dark-mode .card h6,
-        body.dark-mode .card .event-title {
-            color: var(--text-color);
-        }
-
-        body.dark-mode .icon-bar {
-           background-color: var(--card-bg);
-           box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-        }
-        body.dark-mode .icon-item {
-           color: #a0aec0;
-        }
-
-        body.dark-mode .icon-item.active, 
-        body.dark-mode .icon-item:hover {
-           color: var(--primary);
-        }
-
-        body.dark-mode .sidebar {
-            background-color: var(--card-bg);
-            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
-        }
-
-        body.dark-mode .search-bar {
-            background-color: #2d3748;
-            border: 1px solid #4a5568;
-            color: var(--text-color);
-        }
-
-        body.dark-mode .search-bar::placeholder {
-        color: #a0aec0;
-        }
-
-        body.dark-mode .payment-method {
-            background-color: var(--card-bg);
-            border-color: #374151;
-        }
-
-        body.dark-mode .purchase-history-card {
-            background-color: var(--card-bg);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        body.dark-mode .cart-item {
-            border-bottom: 1px solid #374151;
         }
 
         .navbar {
@@ -180,7 +99,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: var(--transition);
             background-color: var(--white);
-             margin-bottom: 1rem;
+            margin-bottom: 1rem;
         }
 
         .card:hover {
@@ -445,7 +364,7 @@
 
         /* Sidebar Navigation Styles */
         .sidebar {
-             position: fixed;
+            position: fixed;
             top: 0;
             left: -320px;
             width: 300px;
@@ -513,10 +432,6 @@
             font-weight: 500;
         }
 
-        body.dark-mode .nav-link-sidebar {
-            color: var(--text-color);
-        }
-
         .nav-link-sidebar:hover {
             background-color: var(--soft-blue);
             color: var(--primary);
@@ -553,15 +468,6 @@
             font-weight: 700;
         }
 
-        body.dark-mode h1,
-        body.dark-mode h2,
-        body.dark-mode h3,
-        body.dark-mode h4,
-        body.dark-mode h5,
-        body.dark-mode h6 {
-            color: var(--text-color);
-        }
-
         h1 {
             font-size: 24px;
         }
@@ -589,10 +495,6 @@
             margin: 20px 0 15px 0;
             font-weight: 700;
             color: var(--black);
-        }
-
-        body.dark-mode .section-title {
-            color: var(--text-color);
         }
 
         .cart-item {
@@ -803,18 +705,9 @@
             border: 2px dashed #dee2e6;
         }
 
-        body.dark-mode .purchase-qr-placeholder {
-            background-color: #2d3748;
-            border-color: #4a5568;
-        }
-
         .purchase-qr-placeholder i {
             font-size: 40px;
             color: #adb5bd;
-        }
-
-        body.dark-mode .purchase-qr-placeholder i {
-            color: #718096;
         }
 
         .purchase-details {
@@ -826,10 +719,6 @@
             font-weight: 600;
             color: var(--black);
             margin-bottom: 8px;
-        }
-
-        body.dark-mode .purchase-event-title {
-            color: var(--text-color);
         }
 
         .purchase-meta {
@@ -845,10 +734,6 @@
             gap: 6px;
             font-size: 13px;
             color: #666;
-        }
-
-        body.dark-mode .purchase-meta-item {
-            color: #cbd5e0;
         }
 
         .purchase-meta-item i {
@@ -871,18 +756,10 @@
             color: #666;
         }
 
-        body.dark-mode .no-purchase-history {
-            color: #cbd5e0;
-        }
-
         .no-purchase-history i {
             font-size: 40px;
             margin-bottom: 15px;
             color: #dee2e6;
-        }
-
-        body.dark-mode .no-purchase-history i {
-            color: #4a5568;
         }
 
         .no-purchase-history p {
@@ -922,55 +799,6 @@
                 flex-direction: column;
                 gap: 8px;
             }
-        }
-
-        /* Additional dark mode fixes */
-        body.dark-mode .dropdown-menu {
-            background-color: var(--card-bg);
-            border-color: #374151;
-        }
-
-        body.dark-mode .dropdown-item {
-            color: var(--text-color);
-        }
-
-        body.dark-mode .dropdown-item:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        body.dark-mode .form-control {
-            background-color: #2d3748;
-            border-color: #4a5568;
-            color: var(--text-color);
-        }
-
-        body.dark-mode .form-control::placeholder {
-            color: #a0aec0;
-        }
-
-        body.dark-mode .btn-outline-secondary {
-            border-color: #4a5568;
-            color: var(--text-color);
-        }
-
-        body.dark-mode .btn-outline-secondary:hover {
-            background-color: #4a5568;
-            border-color: #4a5568;
-            color: var(--text-color);
-        }
-
-        body.dark-mode .text-muted {
-            color: #a0aec0 !important;
-        }
-
-        body.dark-mode .badge.bg-light {
-            background-color: #4a5568 !important;
-            color: var(--text-color) !important;
-        }
-
-        body.dark-mode .carousel-caption {
-            background: rgba(0, 0, 0, 0.7) !important;
         }
     </style>
 </head>
@@ -1058,14 +886,6 @@
                     <div class="theme-option theme-default active" data-theme="default" title="Default Blue"></div>
                     <div class="theme-option theme-purple" data-theme="purple" title="Purple Neon"></div>
                     <div class="theme-option theme-orange" data-theme="orange" title="Orange Modern"></div>
-                </div>
-            </div>
-            
-            <!-- Dark Mode Toggle -->
-            <div class="mt-4">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
-                    <label class="form-check-label" for="darkModeToggle">Mode Gelap</label>
                 </div>
             </div>
             
@@ -2129,7 +1949,6 @@
                 photo: "https://ui-avatars.com/api/?name=Pengguna&background=3A7BCE&color=fff"
             },
             settings: {
-                darkMode: false,
                 theme: "default"
             },
             currentPage: "homePage",
@@ -2148,7 +1967,6 @@
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const menuButton = document.getElementById('menuButton');
-        const darkModeToggle = document.getElementById('darkModeToggle');
         const themeOptions = document.querySelectorAll('.theme-option');
         const cartBadge = document.getElementById('cartBadge');
         const profilePic = document.getElementById('profilePic');
@@ -2221,7 +2039,6 @@
                 
                 // Apply saved settings
                 applyTheme();
-                applyDarkMode();
             } else {
                 // Initialize with default events
                 state.events = [...initialEvents];
@@ -2246,58 +2063,6 @@
                 }
             });
         }
-
-        // Apply dark mode - FIXED BUG
-        function applyDarkMode() {
-             if (state.settings.darkMode) {
-        document.body.classList.add('dark-mode');
-        darkModeToggle.checked = true;
-        
-        // Update meta theme-color for dark mode
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0D1117');
-        
-        // Force re-render untuk elemen yang tidak otomatis update
-        setTimeout(() => {
-            if (state.currentPage === 'homePage') {
-                renderHomePage();
-            } else if (state.currentPage === 'categoryPage') {
-                renderCategoryEvents(state.currentCategory);
-            } else if (state.currentPage === 'cartPage') {
-                renderCartPage();
-            } else if (state.currentPage === 'myTicketsPage') {
-                renderMyTicketsPage();
-            } else if (state.currentPage === 'profilePage') {
-                renderProfilePage();
-            } else if (state.currentPage === 'bookmarksPage') {
-                renderBookmarksPage();
-            }
-        }, 100);
-        
-    } else {
-        document.body.classList.remove('dark-mode');
-        darkModeToggle.checked = false;
-        
-        // Update meta theme-color for light mode
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#3A7BCE');
-        
-        // Force re-render untuk elemen yang tidak otomatis update
-        setTimeout(() => {
-            if (state.currentPage === 'homePage') {
-                renderHomePage();
-            } else if (state.currentPage === 'categoryPage') {
-                renderCategoryEvents(state.currentCategory);
-            } else if (state.currentPage === 'cartPage') {
-                renderCartPage();
-            } else if (state.currentPage === 'myTicketsPage') {
-                renderMyTicketsPage();
-            } else if (state.currentPage === 'profilePage') {
-                renderProfilePage();
-            } else if (state.currentPage === 'bookmarksPage') {
-                renderBookmarksPage();
-            }
-        }, 100);
-    }
-}
 
         // Setup event listeners
         function setupEventListeners() {
@@ -2360,16 +2125,6 @@
 
             sidebarOverlay.addEventListener('click', () => {
                 closeSidebar();
-            });
-
-            // Dark mode toggle - FIXED BUG
-            darkModeToggle.addEventListener('change', () => {
-                state.settings.darkMode = darkModeToggle.checked;
-                applyDarkMode();
-                saveState();
-                
-                // Show toast notification
-                showToast(`Mode Gelap ${state.settings.darkMode ? 'diaktifkan' : 'dinonaktifkan'}`, 'info');
             });
 
             // Theme selection
